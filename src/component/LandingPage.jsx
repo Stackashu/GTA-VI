@@ -122,14 +122,14 @@ const LandingPage = ({ showHeroSection }) => {
         
         {/* this is for navBar  */}
         <div className="nav w-full z-[10] p-5  sm:p-10    absolute top-0 left-0 ">
-          <div className="flex gap-7   ">
+          <div className="flex gap-4 sm:gap-7   ">
             <div className="lines flex sm:gap-[7px] flex-col gap-[5px]">
-              <div className="w-8 h-1 sm:w-11 bg-white"></div>
-              <div className="w-6 h-1 sm:w-8 bg-white"></div>
-              <div className="w-3 h-1 sm:w-5 bg-white"></div>
+              <div className="w-8   h-[3px] sm:h-1 bg-white"></div>
+              <div className="w-6  h-[3px] sm:h-1 sm:w-8 bg-white"></div>
+              <div className="w-3  h-[3px] sm:h-1 sm:w-5 bg-white"></div>
             </div>
 
-            <h3 className="text-3xl sm:text-4xl font-bold tracking-wide -mt-[5px] leading-none text-white">
+            <h3 className="text-2xl sm:text-4xl font-bold tracking-wide  sm:-mt-[5px]  leading-none text-white">
               ROCKSTAR
             </h3>
           </div>
