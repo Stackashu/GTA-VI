@@ -119,6 +119,7 @@ const LandingPage = ({ showHeroSection }) => {
   return (
     <div className="main overflow-hidden w-full rotate-[-15deg] scale-[1.4]  ">
       <div className="landing w-full relative h-screen bg-black  overflow-hidden">
+        
         {/* this is for navBar  */}
         <div className="nav w-full z-[10] p-5  sm:p-10    absolute top-0 left-0 ">
           <div className="flex gap-7   ">
@@ -135,7 +136,6 @@ const LandingPage = ({ showHeroSection }) => {
         </div>
 
         {/* this is photo container */}
-
         <div className="relative overflow-hidden left-0 top-0 w-full h-screen">
           {/* sky image  */}
           <img

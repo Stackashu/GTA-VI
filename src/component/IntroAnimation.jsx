@@ -7,7 +7,7 @@ const getResponsiveFontSize = () => {
   if (typeof window === "undefined") return 120;
   const width = window.innerWidth;
   if (width < 480) return 250; // mobile
-  if (width < 768) return 140; // tablet
+  if (width < 768) return 250; // tablet
   return 250; // desktop
 };
 
@@ -41,7 +41,10 @@ const IntroAnimation = ({ setShowHeroSection }) => {
       opacity: 0,
       onUpdate: function () {
         if (this.progress() >= 0.8) {
-          document.querySelector(".svg").remove();
+          const svgElement = document.querySelector(".svg");
+          if (svgElement) {
+            svgElement.remove();
+          }
           setShowHeroSection(true);
           this.kill();
         }
