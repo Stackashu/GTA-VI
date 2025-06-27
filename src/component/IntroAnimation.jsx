@@ -29,6 +29,7 @@ const IntroAnimation = ({ setShowHeroSection }) => {
     t1.to(".vi-mask-group", {
       rotate: 20,
       duration: 2,
+      delay:10,
       ease: "power4.easeInOut",
       transformOrigin: "50% 50%",
     });

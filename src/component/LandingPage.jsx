@@ -1,7 +1,30 @@
 import { useGSAP } from "@gsap/react";
-import React from "react";
+import React, {  useLayoutEffect } from "react";
 import gsap from "gsap";
+
+// List of images to preload
+const imagesToPreload = [
+  "/sky.png",
+  "/bg.png",
+  "/gta6Text.png",
+  "/girlbg.png",
+  "/ps5.png",
+  "/logo18.png",
+];
+
+const preloadImages = (srcArray) => {
+  srcArray.forEach((src) => {
+    const img = new window.Image();
+    img.src = src;
+  });
+};
+
 const LandingPage = ({ showHeroSection }) => {
+  // Preload images on mount
+  useLayoutEffect(() => {
+    preloadImages(imagesToPreload);
+  }, []);
+
   useGSAP(() => {
     if (!showHeroSection) return;
 
@@ -96,9 +119,9 @@ const LandingPage = ({ showHeroSection }) => {
     gsap.to(".girl", {
       yoyo: true,
       y: 10,
-      duration: 2,
+      duration: 1.1,
       repeat: -1,
-      ease: "Expo.easeInOut",
+      ease: "sine",
     });
 
     const main = document.querySelector(".main");
@@ -154,26 +177,25 @@ const LandingPage = ({ showHeroSection }) => {
           />
           {/* girl image  */}
           <img
-            className=" girl absolute left-[50%] rotate-[-70deg]   -translate-x-1/2 scale-[1.8] mt-[10%]  "
+            className=" girl absolute left-[50%] rotate-[-100deg]   -translate-x-1/2 scale-[3] mt-[10%]  "
             src="/girlbg.png"
           />
         </div>
 
         {/* last box  */}
         <div className="w-full absolute bottom-0 left-0 bg-gradient-to-t from-black to-transparent">
-          <div className="bottmBar flex relative justify-start p-7 items-center  ">
+          <div className="bottmBar flex relative justify-start p-7  items-center  ">
             <div
               className="
               bottom-15
               left-1/2 -translate-x-1/2 
-              sm:left-[10%] sm:translate-x-0 sm:bottom-[25%]
-              md:left-[1%] 
+              sm:translate-x-[100%] sm:bottom-[200%]
+              md:left-[1%] md:translate-x-[5%] md:bottom-4
               flex items-center 
               justify-center 
               border-3 border-white 
               rounded-full 
-              px-3 py-2 sm:px-5 sm:py-2 
-              hover:bg-gray-800 hover:text-3xl 
+              px-3 py-2 sm:px-5 sm:py-2  
               cursor-pointer 
                absolute 
                transition-all duration-300 ease-in-out"
