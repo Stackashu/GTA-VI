@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 
 // Responsive font size calculation for SVG text
@@ -11,8 +11,20 @@ const getResponsiveFontSize = () => {
   return 250; // desktop
 };
 
+// Helper to preload images for lazy loading
+const preloadImage = (src) => {
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    img.src = src;
+    img.onload = resolve;
+    img.onerror = resolve;
+  });
+};
+
 const IntroAnimation = ({ setShowHeroSection }) => {
   const [fontSize, setFontSize] = useState(getResponsiveFontSize());
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const svgRef = useRef(null);
 
   useEffect(() => {
     // Update font size on resize for responsiveness
@@ -23,13 +35,30 @@ const IntroAnimation = ({ setShowHeroSection }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Lazy load images before showing animation
+  useEffect(() => {
+    let isMounted = true;
+    const loadImages = async () => {
+      await Promise.all([
+        preloadImage("./sky.png"),
+        preloadImage("./bg.png"),
+      ]);
+      if (isMounted) setImagesLoaded(true);
+    };
+    loadImages();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   useGSAP(() => {
+    if (!imagesLoaded) return;
     const t1 = gsap.timeline();
 
     t1.to(".vi-mask-group", {
       rotate: 20,
       duration: 2,
-      delay:10,
+      delay: 10,
       ease: "power4.easeInOut",
       transformOrigin: "50% 50%",
     });
@@ -51,7 +80,24 @@ const IntroAnimation = ({ setShowHeroSection }) => {
         }
       },
     });
-  });
+  }, [imagesLoaded, setShowHeroSection]);
+
+  // Don't render SVG until images are loaded
+  if (!imagesLoaded) {
+    return (
+      <div
+        className="svg flex items-center justify-center fixed top-0 left-0 z-[100] w-full h-screen overflow-hidden bg-[#000]"
+        style={{
+          minHeight: "100vh",
+          minWidth: "100vw",
+          padding: 0,
+          margin: 0,
+        }}
+      >
+        {/* You can add a spinner or loading indicator here if desired */}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -62,6 +108,7 @@ const IntroAnimation = ({ setShowHeroSection }) => {
         padding: 0,
         margin: 0,
       }}
+      ref={svgRef}
     >
       <svg
         viewBox="0 0 800 600"
@@ -102,6 +149,7 @@ const IntroAnimation = ({ setShowHeroSection }) => {
           height="100%"
           preserveAspectRatio="xMidYMid slice"
           mask="url(#viMask)"
+          loading="lazy"
         />
         <image
           href="./bg.png"
@@ -110,8 +158,8 @@ const IntroAnimation = ({ setShowHeroSection }) => {
           preserveAspectRatio="xMidYMid slice"
           mask="url(#viMask)"
           className="z-[4]"
+          loading="lazy"
         />
-       
       </svg>
     </div>
   );

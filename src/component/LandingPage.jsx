@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import React, {  useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import gsap from "gsap";
 
 // List of images to preload
@@ -164,21 +164,25 @@ const LandingPage = ({ showHeroSection }) => {
           <img
             className="sky absolute rotate-[-30deg] scale-[1.8] object-cover top-0 left-0 w-full h-screen"
             src="/sky.png"
+            loading="lazy"
           />
           {/* building image  */}
           <img
             className=" building absolute scale-[1.8] rotate-[-3deg] object-cover top-0 left-0 w-full h-screen"
             src="/bg.png"
+            loading="lazy"
           />
           {/* gta text  */}
           <img
             className="gtaText absolute scale-[1.5] top-[-100%] rotate-[-15deg] w-[45%] left-1/2 -translate-x-1/2"
             src="/gta6Text.png"
+            loading="lazy"
           />
           {/* girl image  */}
           <img
             className=" girl absolute left-[50%] rotate-[-100deg]   -translate-x-1/2 scale-[3] mt-[10%]  "
             src="/girlbg.png"
+            loading="lazy"
           />
         </div>
 
@@ -228,12 +232,14 @@ const LandingPage = ({ showHeroSection }) => {
                 md:bottom-0"
               src="/ps5.png"
               alt="PS5"
+              loading="lazy"
             />
 
 
             <img
               className="absolute w-[9%] sm:w-[150%] md:w-[4%] right-5  md:right-10 md:bottom-3" 
               src="/logo18.png"
+              loading="lazy"
             />
           </div>
         </div>
