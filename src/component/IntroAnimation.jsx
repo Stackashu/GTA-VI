@@ -108,7 +108,7 @@ const IntroAnimation = ({ setShowHeroSection }) => {
           />
         </div>
         <div className="text-white text-lg font-semibold tracking-wide">
-          Loding ..
+          Loading ...
         </div>
         <style>
           {`
