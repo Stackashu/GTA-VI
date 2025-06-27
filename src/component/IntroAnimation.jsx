@@ -58,7 +58,7 @@ const IntroAnimation = ({ setShowHeroSection }) => {
     t1.to(".vi-mask-group", {
       rotate: 20,
       duration: 2,
-      delay: 10,
+      delay: 3,
       ease: "power4.easeInOut",
       transformOrigin: "50% 50%",
     });
@@ -86,7 +86,7 @@ const IntroAnimation = ({ setShowHeroSection }) => {
   if (!imagesLoaded) {
     return (
       <div
-        className="svg flex items-center justify-center fixed top-0 left-0 z-[100] w-full h-screen overflow-hidden bg-[#000]"
+        className="svg flex flex-col items-center justify-center fixed top-0 left-0 z-[100] w-full h-screen overflow-hidden bg-[#000]"
         style={{
           minHeight: "100vh",
           minWidth: "100vw",
@@ -94,7 +94,30 @@ const IntroAnimation = ({ setShowHeroSection }) => {
           margin: 0,
         }}
       >
-        {/* You can add a spinner or loading indicator here if desired */}
+        <div className="mb-4">
+          <span
+            style={{
+              display: "inline-block",
+              width: "48px",
+              height: "48px",
+              border: "6px solid #fff",
+              borderTop: "6px solid #888",
+              borderRadius: "50%",
+              animation: "spin 1s linear infinite",
+            }}
+          />
+        </div>
+        <div className="text-white text-lg font-semibold tracking-wide">
+          Loding ..
+        </div>
+        <style>
+          {`
+            @keyframes spin {
+              0% { transform: rotate(0deg);}
+              100% { transform: rotate(360deg);}
+            }
+          `}
+        </style>
       </div>
     );
   }
