@@ -11,19 +11,8 @@ const getResponsiveFontSize = () => {
   return 250; // desktop
 };
 
-// Helper to preload images for lazy loading
-const preloadImage = (src) => {
-  return new Promise((resolve) => {
-    const img = new window.Image();
-    img.src = src;
-    img.onload = resolve;
-    img.onerror = resolve;
-  });
-};
-
 const IntroAnimation = ({ setShowHeroSection }) => {
   const [fontSize, setFontSize] = useState(getResponsiveFontSize());
-  const [imagesLoaded, setImagesLoaded] = useState(false);
   const svgRef = useRef(null);
 
   useEffect(() => {
@@ -35,30 +24,12 @@ const IntroAnimation = ({ setShowHeroSection }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Lazy load images before showing animation
-  useEffect(() => {
-    let isMounted = true;
-    const loadImages = async () => {
-      await Promise.all([
-        preloadImage("./sky.png"),
-        preloadImage("./bg.png"),
-      ]);
-      if (isMounted) setImagesLoaded(true);
-    };
-    loadImages();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   useGSAP(() => {
-    if (!imagesLoaded) return;
     const t1 = gsap.timeline();
-
     t1.to(".vi-mask-group", {
       rotate: 20,
       duration: 2,
-      delay: 3,
+      delay: .5,
       ease: "power4.easeInOut",
       transformOrigin: "50% 50%",
     });
@@ -71,56 +42,12 @@ const IntroAnimation = ({ setShowHeroSection }) => {
       opacity: 0,
       onUpdate: function () {
         if (this.progress() >= 0.8) {
-          const svgElement = document.querySelector(".svg");
-          if (svgElement) {
-            svgElement.remove();
-          }
           setShowHeroSection(true);
           this.kill();
         }
       },
     });
-  }, [imagesLoaded, setShowHeroSection]);
-
-  // Don't render SVG until images are loaded
-  if (!imagesLoaded) {
-    return (
-      <div
-        className="svg flex flex-col items-center justify-center fixed top-0 left-0 z-[100] w-full h-screen overflow-hidden bg-[#000]"
-        style={{
-          minHeight: "100vh",
-          minWidth: "100vw",
-          padding: 0,
-          margin: 0,
-        }}
-      >
-        <div className="mb-4">
-          <span
-            style={{
-              display: "inline-block",
-              width: "48px",
-              height: "48px",
-              border: "6px solid #fff",
-              borderTop: "6px solid #888",
-              borderRadius: "50%",
-              animation: "spin 1s linear infinite",
-            }}
-          />
-        </div>
-        <div className="text-white text-lg font-semibold tracking-wide">
-          Loading ...
-        </div>
-        <style>
-          {`
-            @keyframes spin {
-              0% { transform: rotate(0deg);}
-              100% { transform: rotate(360deg);}
-            }
-          `}
-        </style>
-      </div>
-    );
-  }
+  }, [setShowHeroSection]);
 
   return (
     <div
@@ -132,7 +59,7 @@ const IntroAnimation = ({ setShowHeroSection }) => {
         margin: 0,
       }}
       ref={svgRef}
-    >
+    > 
       <svg
         viewBox="0 0 800 600"
         preserveAspectRatio="xMidYMid slice"

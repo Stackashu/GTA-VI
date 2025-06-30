@@ -1,33 +1,9 @@
 import { useGSAP } from "@gsap/react";
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import gsap from "gsap";
 
-// List of images to preload
-const imagesToPreload = [
-  "/sky.png",
-  "/bg.png",
-  "/gta6Text.png",
-  "/girlbg.png",
-  "/ps5.png",
-  "/logo18.png",
-];
-
-const preloadImages = (srcArray) => {
-  srcArray.forEach((src) => {
-    const img = new window.Image();
-    img.src = src;
-  });
-};
-
-const LandingPage = ({ showHeroSection }) => {
-  // Preload images on mount
-  useLayoutEffect(() => {
-    preloadImages(imagesToPreload);
-  }, []);
-
+const LandingPage = () => {
   useGSAP(() => {
-    if (!showHeroSection) return;
-
     const mM = gsap.matchMedia();
 
     gsap.to(".main", {
@@ -62,7 +38,7 @@ const LandingPage = ({ showHeroSection }) => {
       delay: -0.8,
       ease: "Expo.easeInOut",
     });
-    // for text when the max width is below tabelt view
+    // for text when the max width is below tablet view
     mM.add("(max-width:768px)", () => {
       gsap.to(".gtaText", {
         rotate: 0,
@@ -91,9 +67,8 @@ const LandingPage = ({ showHeroSection }) => {
       duration: 2,
       delay: -0.8,
       ease: "Expo.easeInOut",
-      x: "-50%",
     });
-    // for girl according yo media query
+    // for girl according to media query
     mM.add("(max-width:768px)", () => {
       gsap.to(".girl", {
         scale: 0.9,
@@ -102,7 +77,7 @@ const LandingPage = ({ showHeroSection }) => {
         duration: 2,
         delay: -0.8,
         ease: "Expo.easeInOut",
-        x: "-50%",
+        // x: "-50%",
       });
     });
     mM.add("(max-width:480px)", () => {
@@ -113,7 +88,7 @@ const LandingPage = ({ showHeroSection }) => {
         duration: 2,
         delay: -0.8,
         ease: "Expo.easeInOut",
-        x: "-50%",
+        // x: "-50%",
       });
     });
     gsap.to(".girl", {
@@ -138,7 +113,7 @@ const LandingPage = ({ showHeroSection }) => {
         x: `${-xMove * 1.3}%`,
       });
     });
-  });
+  }, []);
   return (
     <div className="main overflow-hidden w-full rotate-[-15deg] scale-[1.4]  ">
       <div className="landing w-full relative h-screen bg-black  overflow-hidden">
