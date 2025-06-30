@@ -2,8 +2,9 @@ import { useGSAP } from "@gsap/react";
 import React from "react";
 import gsap from "gsap";
 
-const LandingPage = () => {
+const LandingPage = ({showHeroSection}) => {
   useGSAP(() => {
+    if (!showHeroSection) return;
     const mM = gsap.matchMedia();
 
     gsap.to(".main", {
@@ -113,7 +114,7 @@ const LandingPage = () => {
         x: `${-xMove * 1.3}%`,
       });
     });
-  }, []);
+  }, [showHeroSection]);
   return (
     <div className="main overflow-hidden w-full rotate-[-15deg] scale-[1.4]  ">
       <div className="landing w-full relative h-screen bg-black  overflow-hidden">

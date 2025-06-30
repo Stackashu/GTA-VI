@@ -11,7 +11,7 @@ const getResponsiveFontSize = () => {
   return 250; // desktop
 };
 
-const IntroAnimation = ({ setShowHeroSection }) => {
+const IntroAnimation = ({ setShowHeroSection, showHeroSection }) => {
   const [fontSize, setFontSize] = useState(getResponsiveFontSize());
   const svgRef = useRef(null);
 
@@ -48,6 +48,8 @@ const IntroAnimation = ({ setShowHeroSection }) => {
       },
     });
   }, [setShowHeroSection]);
+
+  if (showHeroSection) return null;
 
   return (
     <div

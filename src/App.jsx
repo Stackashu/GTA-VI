@@ -71,14 +71,12 @@ const App = () => {
     );
   }
 
-  // Only show LandingPage after intro animation is done
+  // Always render both components
   return (
     <div>
-      {!showHeroSection && (
-        <IntroAnimation setShowHeroSection={setShowHeroSection} />
-      )}
+      <IntroAnimation setShowHeroSection={setShowHeroSection} showHeroSection={showHeroSection} />
       <div className="overflow-hidden">
-        {showHeroSection && <LandingPage />}
+        <LandingPage showHeroSection={showHeroSection} />
       </div>
     </div>
   );
