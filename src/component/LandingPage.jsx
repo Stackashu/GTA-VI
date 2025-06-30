@@ -116,7 +116,7 @@ const LandingPage = ({showHeroSection}) => {
     });
   }, [showHeroSection]);
   return (
-    <div className="main overflow-hidden w-full rotate-[-15deg] scale-[1.4]  ">
+    <div className="main overflow-hidden z-10 w-full rotate-[-15deg] scale-[1.4]  ">
       <div className="landing w-full relative h-screen bg-black  overflow-hidden">
         
         {/* this is for navBar  */}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import IntroAnimation from './component/IntroAnimation';
 import LandingPage from './component/LandingPage';
+import VideoGta from './component/VideoGta';
 
 // List of all images to preload (relative to public/)
 const imagesToPreload = [
@@ -75,9 +76,10 @@ const App = () => {
   return (
     <div>
       <IntroAnimation setShowHeroSection={setShowHeroSection} showHeroSection={showHeroSection} />
-      <div className="overflow-hidden">
-        <LandingPage showHeroSection={showHeroSection} />
+      <div className=" z-10 overflow-hidden">
+        <LandingPage  showHeroSection={showHeroSection} />
       </div>
+      <VideoGta />
     </div>
   );
 }
