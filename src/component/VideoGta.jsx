@@ -12,21 +12,23 @@ const VideoGta = () => {
   useGSAP(() => {
     if (!outerDivRef.current || !videoRef.current) return;
 
+    // Detect if viewport is mobile or tablet
+    const isMobileOrTablet = window.innerWidth <= 1024;
+
     gsap.fromTo(
       videoRef.current,
-      { opacity: 0,scale:10 },
+      { opacity: 0, scale: 10 },
       {
         opacity: 1,
-        // padding: "3%",
         duration: 2.5,
-        scale:1.5,
-        ease:"expoScale(0.5,7,none)",
+        scale: isMobileOrTablet ? 5 : 1.5,
+        ease: "expoScale(0.5,7,none)",
         scrollTrigger: {
           trigger: outerDivRef.current,
           start: "top 50%", // when outer-div is 30% from top of viewport
-          end:"bottom 70%",
+          end: "bottom 70%",
           toggleActions: "play none none reverse",
-          markers:true
+          markers: false
         },
       }
     );
@@ -37,8 +39,7 @@ const VideoGta = () => {
       ref={outerDivRef}
       className="outer-div overflow-hidden bg-gray-800 h-screen relative w-full flex justify-center items-center -z-10"
     >
-      <div className="w-full absolute bg-gradient-to-b z-20 from-black to-transparent top-0 left-0 h-[20%]"></div>
-      <iframe
+      <div className="w-full absolute bg-gradient-to-b z-20 from-black to-transparent top-0 left-0 h-[20%]"></div>      <iframe
         ref={videoRef}
         className="main-video h-full w-full object-cover transition-all duration-500 rounded-2xl"
         style={{ opacity: 0, padding: "0%" }}
