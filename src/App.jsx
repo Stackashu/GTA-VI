@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react'
 import IntroAnimation from './component/IntroAnimation';
 import LandingPage from './component/LandingPage';
 import VideoGta from './component/VideoGta';
+import ComingSoon from './component/ComingSoon';
+import LuciaVideo from './component/LuciaVideo';
+
 
 // List of all images to preload (relative to public/)
 const imagesToPreload = [
@@ -48,6 +51,7 @@ const App = () => {
         className="flex flex-col items-center justify-center fixed top-0 left-0 z-[100] w-full h-screen overflow-hidden bg-[#000]"
         style={{ minHeight: '100vh', minWidth: '100vw', padding: 0, margin: 0 }}
       >
+       
         <div className="mb-4">
           <span
             style={{
@@ -74,13 +78,17 @@ const App = () => {
 
   // Always render both components
   return (
-    <div>
+    <div >
       <IntroAnimation setShowHeroSection={setShowHeroSection} showHeroSection={showHeroSection} />
       <div className=" z-10 overflow-hidden">
         <LandingPage  showHeroSection={showHeroSection} />
       </div>
       <VideoGta />
+      <ComingSoon/>
+      <LuciaVideo/>
+      <div className='w-full h-screen'></div>
     </div>
+
   );
 }
 
