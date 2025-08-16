@@ -29,7 +29,7 @@ export const LenisProvider = ({ children }) => {
     const lenis = new Lenis({
       duration: 1.5,
       smooth: true,
-      smoothTouch: false,
+      smoothTouch: true,
     });
     lenisRef.current = lenis;
     setLenisInstance(lenis);

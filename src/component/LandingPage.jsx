@@ -115,10 +115,11 @@ const LandingPage = ({showHeroSection}) => {
       });
     });
   }, [showHeroSection]);
+  
   return ( <>
       {/* this is for navBar  */}
       <div className="nav w-full z-[10] p-5  sm:p-10  fixed  top-0 left-0 ">
-          <div className="flex gap-4 sm:gap-7   ">
+          <div className="flex gap-4 sm:gap-7    ">
             <div className="lines flex sm:gap-[7px] flex-col gap-[5px]">
               <div className="w-8   h-[5px] sm:h-1 sm:w-10 bg-white"></div>
               <div className="w-6  h-[5px] sm:h-1 sm:w-8 bg-white"></div>

@@ -4,6 +4,7 @@ import LandingPage from './component/LandingPage';
 import VideoGta from './component/VideoGta';
 import ComingSoon from './component/ComingSoon';
 import LuciaVideo from './component/LuciaVideo';
+import AllCharacters from './component/AllCharacters';
 
 
 // List of all images to preload (relative to public/)
@@ -86,7 +87,7 @@ const App = () => {
       <VideoGta />
       <ComingSoon/>
       <LuciaVideo/>
-      <div className='w-full h-screen'></div>
+     <AllCharacters/>
     </div>
 
   );
