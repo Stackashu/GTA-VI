@@ -67,6 +67,7 @@ const App = () => {
           />
         </div>
         <div className="text-white text-lg font-semibold tracking-wide">Loading ...</div>
+        <div className="text-white text-lg font-semibold tracking-wide">Refresh If not Scroll</div>
         <style>{`
           @keyframes spin {
             0% { transform: rotate(0deg);}
